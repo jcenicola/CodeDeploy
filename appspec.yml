@@ -1,0 +1,25 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /wordpress
+    destination: /var/www/html/wordpress
+    
+
+hooks:
+  BeforeInstall:
+    - location: server_build.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: permissions.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: server_start.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: server_stop.sh
+      timeout: 300
+      runas: root
